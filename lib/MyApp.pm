@@ -12,9 +12,17 @@ sub startup ($self) {
 
   # Router
   my $r = $self->routes;
+say 2;
 
   # Normal route to controller
   $r->get('/')->to('example#welcome');
+  $r->get(
+    '/:id/reserve' => sub ($c) {
+      my $id   = $c->param('id');
+      my $json = {id => $id};
+      $c->render( json => $json);
+    }
+  );
 }
 
 1;
